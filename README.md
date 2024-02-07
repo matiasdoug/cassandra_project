@@ -1,6 +1,6 @@
 # Projeto Inforbarflix
 
-![cover](/img/inforbarflix.png)
+![cover](/img/inforbarflix.jpg)
 
 Cassandra é um banco de dados Nosql da família wide columns, que armazena seus dados de forma esparça, NÃO É UM SUBSTITUTO dos bancos de dados RDBMS, 
 e atua justamente onde os RDBMS deixam a desejar quando se trata de alta disponibilidade, escalabilidade e alta performance em ambientes que exijam uma alta taxa de leitura e escrita.
@@ -97,7 +97,7 @@ docker exec -it <nome_do_container> nodetool status
 
 docker exec -it <nome_do_container> cqlsh
 
-![cover](/img/cqlsh.png)
+![cover](/img/clqsh.png)
 
 # 8 - Criar Keyspace
 
