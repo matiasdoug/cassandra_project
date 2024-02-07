@@ -1,0 +1,137 @@
+#CRIAR KEYSPACE
+ 
+CREATE KEYSPACE inforbarflix
+WITH REPLICATION = {
+'class' : 'NetworkTopologyStrategy',
+'DC_BRASIL' : 3,
+'DC_JAPAO' : 3,
+'DC_BELGICA' : 3
+}
+AND DURABLE_WRITES = true;
+
+#NIVEL DE CONSISTÊNCIA
+
+CONSISTENCY LOCAL_ONE;
+
+#USAR KEYSPACE
+USE inforbarflix;
+
+#CRIAR TABELAS
+
+CREATE TABLE inforbarFlix.usuario (
+ id_usuario uuid,
+ no_usuario text,
+ ds_imagem_perfil text,
+ tx_email text,
+ dt_nascimento date,
+ tp_sexo text,
+ ds_classificao_etaria text,
+ ls_genero_preferido set<text>,
+ ls_lista_associada list<text>,
+ dt_cadastro timestamp,
+ dt_ultimo_acesso timestamp,
+ PRIMARY KEY (id_usuario)
+ ) WITH comment = 'Armazena os usuários';
+
+ CREATE TABLE inforbarflix.titulo (
+ id_titulo uuid,
+ no_titulo text,
+ tp_titulo text,
+ tx_sinopse text,
+ dt_lancamento date,
+ no_diretor text,
+ ds_classificacao_indicativa text,
+ tx_elenco set<text>,
+ ds_duracao text,
+ tx_imagem_capa text,
+ PRIMARY KEY (id_titulo)
+ ) WITH comment = 'Armazena os titulos do catolago';
+
+CREATE TABLE inforbarflix.titulo_por_genero (
+ id_genero uuid,
+ dt_competencia text,
+ dt_lancamento date,
+ id_titulo uuid,
+ no_genero text,
+ no_titulo text,
+ tp_titulo text,
+ tx_sinopse text,
+ ds_duracao text,
+ tx_imagem_capa text,
+ PRIMARY KEY ((id_genero, dt_competencia), dt_lancamento, id_titulo)
+ )
+ WITH comment = 'Armazena os titulos por genero (drama, comedia, terror)'
+ AND CLUSTERING ORDER BY (dt_lancamento DESC, id_titulo DESC);
+
+CREATE TABLE inforbarflix.visualizacao_status (
+ id_usuario uuid,
+ ds_competencia text,
+ ds_status text,
+ dt_visualizacao timestamp,
+ id_visualizacao uuid,
+ id_titulo uuid,
+ no_titulo text,
+ tp_titulo text,
+ tx_sinopse text,
+ tx_imagem_capa text,
+ nu_tempo_assistido int,
+ PRIMARY KEY ((id_usuario, ds_competencia), ds_status, dt_visualizacao,
+ id_visualizacao)
+ )
+ WITH comment = 'Armazena as visualizacoes do usuário por status (agendado, em andamento,
+ concluido)'
+ AND CLUSTERING ORDER BY (ds_status ASC, dt_visualizacao DESC, id_visualizacao DESC);
+
+ CREATE TABLE inforbarflix.titulo_por_lista (
+ id_lista uuid,
+ ds_competencia text,
+ dt_atualizacao_lista timestamp,
+ dt_lancamento_filme date,
+ id_titulo uuid,
+ no_lista text,
+ no_titulo text,
+ tp_titulo text,
+ tx_sinopse text,
+ ds_duracao text,
+ tx_imagem_capa text,
+ PRIMARY KEY ((id_lista, ds_competencia), dt_atualizacao_lista,
+ dt_lancamento_filme, id_titulo)
+ )
+ WITH comment = 'Armazena os titulos por lista (lancamento, bombando)'
+ AND CLUSTERING ORDER BY (dt_atualizacao_lista DESC, dt_lancamento_filme DESC, id_titulo DESC);
+
+CREATE TABLE inforbarflix.titulo_episodio (
+ id_titulo uuid,
+ nu_temporada int,
+ nu_episodio int,
+ no_episodio text,
+ ds_duracao text,
+ tx_sinopse text,
+ tx_imagem_capa text,
+ dt_lancamento_episodio date,
+ PRIMARY KEY (id_titulo, nu_temporada, nu_episodio)
+ )WITH comment = 'Armazena os episodios dos titulos (lancamento, bombando)'
+ AND CLUSTERING ORDER BY (nu_temporada ASC, nu_episodio ASC);
+
+CREATE TABLE inforbarflix.lista_titulos (
+ id_lista uuid,
+ no_lista text,
+ tp_lista text,
+ tp_status text,
+ dt_criacao timestamp,
+ PRIMARY KEY (id_lista)
+ ) WITH comment = 'Armazena as lista de titulos (lancamento, bombando)';
+
+CREATE TABLE inforbarflix.genero (
+ id_genero uuid,
+ no_genero text,
+ PRIMARY KEY (id_genero)
+ ) WITH comment = 'Armazena os generos dos titulos (romance, acao)';
+
+
+
+
+
+
+
+
