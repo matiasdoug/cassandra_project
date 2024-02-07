@@ -54,7 +54,8 @@ devido à natureza relacional do banco de dados tornam a leitura de dados lenta 
 
 # 1 - Rodar os Containers do Primeiro Datacenter dc_brasil (Caso tenha os recursos apagar o "#")
 
-```docker run --name jaelson-estudos-n1 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
+```
+docker run --name jaelson-estudos-n1 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
 #docker run --name jaelson-estudos-n2 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
 #docker run --name jaelson-estudos-n3 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
 ```
@@ -69,40 +70,51 @@ docker inspect <nome_do_container>
 
 # 3 - Conectar Datacenter dc_japao (--memory opcional)
 
+```
 docker run --name jaelson-estudos2-n1 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_japao -d cassandra
 #docker run --name jaelson-estudos2-n2 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_japao -d cassandra
 #docker run --name jaelson-estudos2-n3 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_japao -d cassandra
+```
 
 ![cover](/img/container2.png)
 
 # 4 - Conectar Datacenter dc_belgica (--memory opcional)
 
+```
 docker run --name jaelson-estudos3-n1 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_belgica -d cassandra
 #docker run --name jaelson-estudos3-n2 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_belgica -d cassandra
 #docker run --name jaelson-estudos3-n3 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_belgica -d cassandra
+```
 
 ![cover](/img/container3.png)
 
 # 5 - Checar Containers em Execução
 
+```
 docker ps
+```
 
 ![cover](/img/checar_container.png)
 
 # 6 - Checar Cluster
 
+```
 docker exec -it <nome_do_container> nodetool status
+```
 
 ![cover](/img/checar_cluster.png)
 
 # 7 - Abrir o cqls
 
+```
 docker exec -it <nome_do_container> cqlsh
+```
 
 ![cover](/img/clqsh.png)
 
 # 8 - Criar Keyspace
 
+```
 CREATE KEYSPACE inforbarflix
 WITH REPLICATION = {
 'class' : 'NetworkTopologyStrategy',
@@ -111,19 +123,26 @@ WITH REPLICATION = {
 'DC_BELGICA' : 3
 }
 AND DURABLE_WRITES = true;
+```
 
 - NIVEL DE CONSISTÊNCIA
 
+```
 CONSISTENCY LOCAL_ONE;
+```
 
 - USAR KEYSPACE
+```
 USE inforbarflix;
+```
 
 ![cover](/img/create_keyspace.png)
 
 # 9 - Checar as Informações da Keyspace
 
+```
 DESCRIBE KEYSPACE inforbarflix;
+```
 
 ![cover](/img/describe_keyspace.png)
 
