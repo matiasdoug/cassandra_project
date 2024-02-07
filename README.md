@@ -54,9 +54,10 @@ devido à natureza relacional do banco de dados tornam a leitura de dados lenta 
 
 # 1 - Rodar os Containers do Primeiro Datacenter dc_brasil (Caso tenha os recursos apagar o "#")
 
-docker run --name jaelson-estudos-n1 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
+```docker run --name jaelson-estudos-n1 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
 #docker run --name jaelson-estudos-n2 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
 #docker run --name jaelson-estudos-n3 -e CASSANDRA_SEEDS=172.17.0.2 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch -e CASSANDRA_DC=dc_brasil -d cassandra
+```
 
 ![cover](/img/container1.png)
 
