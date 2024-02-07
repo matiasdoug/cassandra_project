@@ -50,6 +50,7 @@ devido à natureza relacional do banco de dados tornam a leitura de dados lenta 
 - Conta AWS (ambiente cloud9 Amazon Linux, t3.xlarge 4vcpu 16GIB)
 - Docker Versão 25.0.2
 - Draw.io
+- Hackolade
 
 # 1 - Rodar os Containers do Primeiro Datacenter dc_brasil (Caso tenha os recursos apagar o "#")
 
