@@ -125,6 +125,12 @@ DESCRIBE KEYSPACE inforbarflix;
 
 ![cover](/img/describe_keyspace.png)
 
+# 10 - Exemplo Fluxo Aplicacional Q1 (exibir dados do usuário)
+
+![cover](/Q1.png)
+
+
+
 
 
 
