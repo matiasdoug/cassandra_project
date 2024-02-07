@@ -64,7 +64,9 @@ docker run --name jaelson-estudos-n1 -e CASSANDRA_CLUSTER_NAME=Inforbarflix -e C
 
 # 2 - Pegar o IP Para Conectar os Demais Nós
 
+```
 docker inspect <nome_do_container>
+```
 
 ![cover](/img/docker_inspect.png)
 
